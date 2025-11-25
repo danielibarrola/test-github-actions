@@ -3,11 +3,12 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_call:
     inputs:
       fail:
         description: 'Whether this workflow should fail'
         required: false
+        type: string
         default: 'none'
 
 jobs:
