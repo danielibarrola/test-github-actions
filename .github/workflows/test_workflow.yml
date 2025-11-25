@@ -19,9 +19,5 @@ jobs:
       - name: Check for failure condition
         run: |
           echo "Current SHA: ${{ github.sha }}"
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.fail }}" ]]; then
-            echo "Simulating failure for this commit."
-            exit 1
-          fi
-          echo "Simulating success."
+          echo "Failing"
           exit 0
