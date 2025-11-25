@@ -1,3 +1,3 @@
 # test-github-actions
 
-repo for testing purposes
+Repo for testing purposes
