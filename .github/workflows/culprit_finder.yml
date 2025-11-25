@@ -24,4 +24,4 @@ jobs:
     if: ${{ inputs.workflow-to-debug == 'test_workflow.yml' }}
     uses: ./.github/workflows/test_workflow.yml
     
-    name: Bisect Build and Test
+    name: Bisect Test Workflow
