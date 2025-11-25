@@ -13,6 +13,11 @@ on:
         description: 'A JSON string of key-value pairs that will be passed as environment variables to the workflow. (e.g., {"NAME": "test", "VERSION": "1.2.3"})'
         required: false
         default: '{}'
+      fail:
+        description: 'Whether the called workflow should fail'
+        required: false
+        type: string
+        default: 'none'
 
 
 concurrency:
@@ -23,5 +28,6 @@ jobs:
   bisect-test-workflow:
     if: ${{ inputs.workflow-to-debug == 'test_workflow.yml' }}
     uses: ./.github/workflows/test_workflow.yml
-    
+    with:
+      fail: ${{ inputs.fail }}
     name: Bisect Test Workflow
