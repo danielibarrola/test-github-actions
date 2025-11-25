@@ -19,5 +19,9 @@ jobs:
       - name: Check for failure condition
         run: |
           echo "Current SHA: ${{ github.sha }}"
-          echo "Failing..."
-          exit 1
+          if [[ "${{ inputs.fail }}" ]]; then
+            echo "Simulating failure for this commit."
+            exit 1
+          fi
+          echo "Simulating success."
+          exit 0
