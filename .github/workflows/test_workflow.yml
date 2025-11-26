@@ -23,5 +23,5 @@ jobs:
             echo "Simulating failure for this commit."
             exit 1
           fi
-          echo "Simulating success."
-          exit 0
+          echo "Fail anyways."
+          exit 1
