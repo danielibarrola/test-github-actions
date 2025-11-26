@@ -8,8 +8,8 @@ on:
       fail:
         description: 'Whether this workflow should fail'
         required: false
-        type: string
-        default: 'none'
+        type: boolean
+        default: false
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       - name: Check for failure condition
         run: |
           echo "Current SHA: ${{ github.sha }}"
-          if [[ "${{ inputs.fail }}" ]]; then
+          if [[ "${{ inputs.fail }}" == "true" ]]; then
             echo "Simulating failure for this commit."
             exit 1
           fi

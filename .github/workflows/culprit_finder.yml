@@ -16,8 +16,8 @@ on:
       fail:
         description: 'Whether the called workflow should fail'
         required: false
-        type: string
-        default: 'none'
+        type: boolean
+        default: false
 
 
 concurrency:
