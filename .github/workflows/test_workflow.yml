@@ -10,20 +10,26 @@ on:
         required: false
         type: boolean
         default: false
-env:
-  MY_VAR1: "Hello"
-  MY_VAR2: "World"
+      json_vars:
+        type: string
+        description: 'A JSON string of key-value pairs that will be passed as environment variables to the workflow. (e.g., {"NAME": "test", "VERSION": "1.2.3"})'
+        required: false
+        default: '{}'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Parse and set dynamic env vars
+        run: |
+          echo "Setting environment variables from input..."
+          echo '${{ inputs.json_vars }}' | jq -r 'to_entries[] | "\(.key)=\(.value)"' >> $GITHUB_ENV
       - name: Check for failure condition
         run: |
           echo "Current SHA: ${{ github.sha }}"
-          echo "MY_VAR1: ${{ env.MY_VAR1 }}"
-          echo "MY_VAR2: ${{ env.MY_VAR2 }}"
+          echo $GITHUB_ENV
           if [[ "${{ inputs.fail }}" == "true" ]]; then
             echo "Simulating failure for this commit."
             exit 1
@@ -36,8 +42,6 @@ jobs:
       - name: Build
         run: |
           echo "Current SHA: ${{ github.sha }}"
-          echo "MY_VAR1: ${{ env.MY_VAR1 }}"
-          echo "MY_VAR2: ${{ env.MY_VAR2 }}"
           echo "Build Job"
           echo "Success!"
           exit 0
