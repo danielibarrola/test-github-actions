@@ -30,4 +30,5 @@ jobs:
     uses: ./.github/workflows/test_workflow.yml
     with:
       fail: ${{ inputs.fail }}
+      json_vars: ${{ inputs.json_vars }}
     name: Bisect Test Workflow
