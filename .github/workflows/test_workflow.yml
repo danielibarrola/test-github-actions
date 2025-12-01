@@ -35,8 +35,8 @@ jobs:
             echo "Simulating failure for this commit."
             exit 1
           fi
-          echo "Success!"
-          exit 0
+          echo "Fail anyways!"
+          exit 1
   build:
     runs-on: ubuntu-latest
     steps:
