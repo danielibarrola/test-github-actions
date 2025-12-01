@@ -29,7 +29,8 @@ jobs:
       - name: Check for failure condition
         run: |
           echo "Current SHA: ${{ github.sha }}"
-          echo $GITHUB_ENV
+          echo "Listing all environment variables:"
+          env
           if [[ "${{ inputs.fail }}" == "true" ]]; then
             echo "Simulating failure for this commit."
             exit 1
