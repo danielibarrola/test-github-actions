@@ -10,6 +10,9 @@ on:
         required: false
         type: boolean
         default: false
+env:
+  MY_VAR1: "Hello"
+  MY_VAR2: "World"
 
 jobs:
   test:
@@ -19,9 +22,22 @@ jobs:
       - name: Check for failure condition
         run: |
           echo "Current SHA: ${{ github.sha }}"
+          echo "MY_VAR1: ${{ env.MY_VAR1 }}"
+          echo "MY_VAR2: ${{ env.MY_VAR2 }}"
           if [[ "${{ inputs.fail }}" == "true" ]]; then
             echo "Simulating failure for this commit."
             exit 1
           fi
-          echo "Fail anyways."
+          echo "Success!"
           exit 1
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: |
+          echo "Current SHA: ${{ github.sha }}"
+          echo "MY_VAR1: ${{ env.MY_VAR1 }}"
+          echo "MY_VAR2: ${{ env.MY_VAR2 }}"
+          echo "Build Job"
+          echo "Success!"
+          exit 0
